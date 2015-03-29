@@ -1,0 +1,131 @@
+---
+title: "Real or Artifact? Infant Mortality Differences in Separated Germany"
+author: "Jonas Schöley"
+date: "`r Sys.Date()`"
+output: rmarkdown::tufte_handout
+bibliography: ../refs/refs.bib
+---
+
+```{r echo=FALSE, message=FALSE}
+source("anly/01-init.R")
+load("out/dx_ew.rdata")
+load("out/nx_ew.rdata")
+source("anly/03-transform.R")
+```
+
+\smallskip
+
+## Background & Aim
+
+<!--- Time trends of infant mortality in separated Germany  --->
+
+Differences in infant mortality rates between East- and West Germany prior to reunification show a remarkable pattern. While West Germany with time achieved the larger improvements in important public health indicators^[@Wiesner2001.] (e.g. life-expectancy at birth), the *race* for lower infant mortality between both countries shows no clear winner.
+
+Figure 1 displays infant mortality rates for East- and West-Germany from 1956 until reunification in 1990. Periods shaded in blue indicate faster improvements in infant mortality in the West, while regions shaded in red indicate faster improvements in the East.^[As defined by the annual rate of change in the differences in infant mortality between East and West.] During the 1950s until the mid-60s West-German infant mortality rates were lower compared to the East with East-Germany having mixed success in catching up. Starting in 1963 East-Germany's infant mortality rates were improving with a higher yearly rate compared to West-Germany, a trend that only reversed 10 years later and led to East-Germany having lower infant mortality from 1966 until 1980. While West-German improvements in infant mortality stagnated during parts of the 60s and 70s, East-Germany continued to make progress. With the onset of the 1980s infant mortality reached about the same levels in the East and the West while continuing to decease in both states until reunification.
+
+```{r echo=FALSE, fig.margin=TRUE, fig.cap="Infant mortality rates for East \\& West Germany over time, both sexes. Absolute differences between East \\& West displayed as bars. \\emph{Source: Human Mortality Database}."}
+source("anly/04a-plot_m0_ew_phases.R", print.eval = TRUE)
+```
+
+<!--- No conses on reasons for differences --->
+
+The successes in the reduction of infant mortality in East-Germany have been widely noted in the literature,^[See for example @Wiesner2001, @Hockerts1994.] while the reasons for the East-West differences (or for that matter the reasons for the remarkable progress achieved by East-Germany) are disputed. Some authors argue that the GDR implemented more effective public health measures regarding perinatal care^[See @Wauer2012, 97; @Jorch2000, 28.] while on the other hand the lower infant mortality rate is disregarded as a statistical artifact based on differences in the definition of infant mortality in East- and West Germany.^[See @Mueller1976 for an early critique. More recent expressions of this position can be found in @Luy2004, @Luy2006.]
+
+<!--- Aim --->
+
+> *The aim of this paper is to identify the determinants of the changing infant mortality differences between separated Germany over time.*
+
+## Possible Determinants
+
+<!--- Miscoding, definition of life-birth --->
+
+> *Do differences in the definition (and coding practice) of a life-birth between East- and West-Germany over time contribute to the changing differences in infant mortality between East and West?*
+
+Public controversy about the low level of infant mortality in East-Germany has been caused by an article published in the large German news magazine *"Der Spiegel"*. Published in 1992 claims were made about a widespread practice in the former GDR of drowning infants weighing less than 1000g and giving improper care to children showing only weak signs of life at birth. It is stated in the article that these cases were not counted as infant deaths but rather as still-births or dead-births, lowering the overall infant mortality rates.^[@Spiegel1992.] As of 2015 these claims lack an official investigation and there is only few research devoted to it.
+
+Perfectly clear are differences in the *official* definition of life-births between East- and West-Germany. In 1961 the GDR introduced a legislation changing the definition of a life-birth.^[@DDR1961] In order to qualify as a life-birth a newborn now had to have a pulse *and* breath after complete separation from the mother. This was a comparably high hurdle as in West-Germany a single sign of life remained to be sufficient to qualify as living.
+
+An early attempt to quantify a possible effect of the change in definition on the differences between East- and West-German infant mortality levels was published by @Mueller1976. Müller calculated expected rates of infant mortality for West-Germany based on the scenario that the GDR definition of a life-birth also holds true for West-Germany. The author concludes that in this case the advantage of East-Germany vanishes with West-Germany having the lower level of infant-mortality during the 1970s. This analysis is criticized by @Mallik1994 as unrealistic as Müller assumes that all newborns with a birth weight lower than 2500g and shorter than 35cm show only a single sign of life.
+
+@Mallik1994 addresses the questions if the changes in the definition of infant mortality a) were politically motivated in order to "sugarcoat" statistics and b) if this change in definition explains part of the decrease in infant mortality in East-Germany. Based on an interpretation of East-German writings on infant mortality the author concludes that the statistical influence of the redefinition was indeed intended.^[@Mallik1994, 18ff.] However, the change of definition, according to Mallik, did not have any relevant effect on the infant mortality statistic. The author supports this claim by attempting to show that the perinatal mortality and the share of death-births in the year 1961 (the year of the change in definition) do not deviate from past trends.^[The methodology underlying this analysis however is flawed. In order to extrapolate a past trend the author takes the *arithmetic average* of yearly *rates of change* instead of the more appropriate *geometric average*. The rates of change in both measures show wild variation over the short 6-year extrapolation period, making any predicted point estimate highly unreliable. Further the author only takes into account the year the redefinition of life-birth was enacted, potentially missing lagged effects of that policy.] Mallik concludes that the medical personnel resisted the new definition of life-birth and continued coding practices as before.
+
+In our own attempt to answer the question of an influence on the definition of life-birth on infant mortality levels we further operationalize the issue. As any effect of East-West differences in the definition (and coding practice) of a life-birth on infant mortality differences between both states has to show in the share of life-births we ask:
+
+> *Do differences in the share of life-births between East- and West-Germany over time contribute to the changing differences in infant mortality between East and West?*
+
+<!--- Efficiency of nation specific policies --->
+
+@Wauer2012 argues that the highly centralized administration and government of the GDR allowed for a faster implementation of important perinatal health care policies compared to West Germany.^[From 1975 until dissolution in 1990 Wauer held a secretary position within the ministerial initiated East-German research project "Perinatologie" [@Wauer2013].] Efficiency of policy implementation shows in the effect of the policies themselves. Therefore we ask the question:
+
+> *Do nation specific health policies contribute to the changing differences in infant mortality between East and West?*
+
+To asses this question we must consider the year of enactment of all health policies in East- and West-Germany which relate to prenatal, perinatal and postnatal care.
+
+Some examples for relevant policies include:
+
+**1972**
+  : *Ministerium für Gesundheitswesen, Verfügungen und Mitteilungen, Berlin 8.6.1972*
+  : A regulation forbidding nursery staff to leave infants lying in face-down position without supervision. This is seen as a possible cause for the reduction in *Sudden infant death syndrome* incidences in East Germany.^[See @Vennemann2003, 511.]
+
+> ... (more to come)
+
+<!--- Co-variables --->
+
+At the heart of the discourse about the differences in infant mortality levels between East- and West-Germany lies the question of health-care policies versus registration and coding of deaths. However, other variables might also contribute to the observed differences. While we will not focus on these measures we still include them as co-variables to improve the precision of our main estimators.
+
+> *Do changing differences in the mean maternal age between East- and West-Germany over time contribute to the changing differences in infant mortality between East and West?*
+
+> ... (more to come)
+
+> *Do changing differences in the per capita health care expenses between East- and West-Germany over time contribute to the changing differences in infant mortality between East and West?*
+
+> ... (more to come)
+
+## Data & Methods
+
+*Data* on health policies is gathered from a review of the literature on German infant mortality and from a review of the body of health care legislation of both German States. Aggregate data on infant mortality, mean maternal age, share of dead-births and health care expenses for East- and West-Germany is taken from the Statistical Office of Germany.
+
+<!--- The case for difference in differences --->
+
+What drives the *changing differences* in infant mortality levels between both German states? The way this question is stated might suggest a *difference in differences* (DID) approach.^[@Angrist2009 give a textbook introduction to DID. For a canonical implementation of the method see @Card1994.] DID estimates the effect of a *treatment* (e.g. a policy, a historical event) on the differences between two or more groups (e.g. countries, regions). Ideally only one of the groups is affected by the treatment, the other group serves as a *control*. Assuming that the differences between groups over time would remain *constant* in the absent of treatment, any post-treatment deviations from the pre-treatment differences can be interpreted as an effect of the treatment (often after controlling for other features).
+
+A strong point of DID is the introduction of *causality* into regression analysis. Taking inspiration from clinical trials and experimental methods prevalent in the natural sciences DID stresses the importance of *time* when assessing *causality*: First the cause, then the effect. Being concerned with the causes of the changing differences in infant mortality levels between East- and West-Germany, DID is a reasonable point of departure.
+
+<!--- Adapting difference in differences --->
+
+While providing a suitable framework we adapt DID into a continuous time model. The main idea is to explain changing East-West differences in the level of infant mortality with changing East-West differences in the share of life-births, changing differences in the mean maternal age, changing differences in the per captia health care expenses *and* with the introduction of health-care policies related to pregnancy, birth and infancy.
+
+Our "population" consists of single years between 1949 and 1990. Each year features unique characteristics in terms of infant mortality levels and co-variate levels. The dependent variable is the annual change in the difference in infant mortality rates between East- and West-Germany. Likewise the share of life-births, the mean maternal age and the per capita health care expenses are included as regressors in the form of yearly changes in East-West differences. This formulation is true to the spirit of DID incorporating both *temporal causality*^[Any measured effect of these variables can be interpreted along the time-axis: $Y$ increased over time while $X$ decreased over the same period.] and *comparision*.^[As we are interested in the *differences* between two groups we include these differences directly into the model. No variable designating group membership is needed.]
+
+To assess the impact of policy changes we depart from the DID framework. Instead of just one clear cut policy change we are interested in the singular effects of various policies issued over a period of 40 years in East- as well as in West-Germany. Within this setting, notions of treatment- and control group loose meaning. Instead we introduce each policy of each country as a separate effect into the model and specify *time-lags* to account for delayed effects of public health policies on infant mortality levels.
+
+## Model
+
+$t$
+  : represents some year within the period of the German Separation 1949 until 1990. The single years of that period are the *population* of this model. Instead of taking time directly into account as a co-variable and modeling a trend, we are correlating specific features of each year with the value of the outcome variable, also given by year.
+
+$\Delta$
+  : is the difference in some measure $X$ between East- and West-Germany as defined by $X_\text{East} - X_\text{West}$. Rather than considering East- and West-Germany as a separate variable, we are directly looking at differences between East and West. This allows for easy interpretation: Differences between East- and West are in turn explained by differences between East and West.
+
+$\frac{d \Delta Y(t)} {dt}$
+  : Annual change in the infant mortality differences between East- and West-Germany as defined by $\Delta m(0)_{t} - \Delta m(0)_{t-1}$. A positive value means that improvements are happening faster in the West. Likewise a negative value represents faster improvements in the East.
+
+$P_i(t)$
+  : Enactment of policy $P_i$ at year $t$ or five years before. The five year time period after enactment is meant to capture the time-window within which the policy might enfold its effect. The policy variables are binary ($0$: policy not enacted, $1$: policy enacted). A wide range of East- and West-German policies potentially influencing infant mortality are covered. The sum of all East- or West-German policy coefficients represent the overall effect of all policies.
+
+$\frac{d\Delta L(t)} {dt}$
+  : Annual change in the differences in the proportion of Life-births on all births between East- and West-Germany as defined by $\Delta L(t) - \Delta L(t-1)$.
+
+$\frac{d\Delta M(t)} {dt}$
+  : Annual change in the differences in mean maternal age between East- and West Germany as defined by $\Delta M(t) - \Delta M(t-1)$.
+
+$\frac{d\Delta H(t)} {dt}$
+  : 5-year change in the per capita health care expenditure differences between East- and West-Germany as defined by $\Delta H(t) - \Delta H(t-5)$.
+
+$$
+\frac{d \Delta Y(t)} {dt} = \beta_0 + \beta_{1_i} P_i(t) + \beta_2 \frac{d\Delta L(t)} {dt} + \beta_3 \frac{d\Delta M(t)} {dt} + \beta_4 \frac{d\Delta H(t)} {dt}
+$$
+
+\clearpage
+
+# References
